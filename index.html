@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Example</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    /></head
+  ><link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: "Baloo 2", cursive;
+    }
+
+    #mainContent {
+      position: fixed;
+      bottom: -100vh;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #32a871; /* Bootstrap success */
+
+      transition: bottom 7s ease-in-out;
+      z-index: 10;
+    }
+
+    #mainContent.slide-up {
+      bottom: 0;
+    }
+    #ivee-image {
+      opacity: 1;
+      transition: opacity 6s ease-in-out;
+    }
+
+    #ivee-image.fade-out {
+      opacity: 0;
+    }
+    #popupText {
+      opacity: 0;
+      color: white; /* ✅ add this */
+      transition: opacity 1s ease-in-out, color 1s ease;
+    }
+
+    #popupText.show {
+      opacity: 1;
+    }
+    @keyframes pop {
+      0% {
+        transform: scale(1);
+      }
+      30% {
+        transform: scale(1.7);
+      }
+      60% {
+        transform: scale(0.8);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .popup-animate {
+      animation: pop 1.2s ease-in-out;
+    }
+    .hero {
+      position: relative;
+      transition: background-color 1s ease;
+    }
+    #bear {
+      position: absolute;
+      top: 30px; /* Start off-screen at bottom */
+      left: -200px; /* Start off-screen to the left */
+
+      transition: top 4s ease, left 4s ease;
+    }
+    #bodyWave {
+      position: absolute;
+      top: 250px; /* Start off-screen at bottom */
+      right: -200px; /* Start off-screen to the left */
+
+      transition: top 4s ease, right 4s ease;
+    }
+    #frogFloat {
+      position: absolute;
+      top: 30px; /* Start off-screen at bottom */
+      right: -200px; /* Start off-screen to the left */
+
+      transition: top 4s ease, right 4s ease;
+    }
+    #bodyMusic {
+      position: absolute;
+      bottom: 30px; /* Start off-screen at bottom */
+      left: -200px; /* Start off-screen to the left */
+
+      transition: bottom 4s ease, left 4s ease;
+    }
+    #twoWeirdos {
+      position: absolute;
+      bottom: 30px; /* Start off-screen at bottom */
+      right: -200px; /* Start off-screen to the left */
+
+      transition: top 4s ease, right 4s ease;
+    }
+  </style>
+  <body>
+    <audio id="firstAudio" src="Cricket Insect Sound.mp3"></audio>
+    <audio
+      id="thirdAudio"
+      src="Connie Francis - Pretty Little Baby.mp3"
+    ></audio>
+    <audio
+      id="secondAudio"
+      src="Eat bulaga funny laugh sound effect.mp3"
+    ></audio>
+    <div
+      id="intro"
+      class="vh-100 d-flex justify-content-center align-items-center"
+    >
+      <div class="d-flex flex-column align-items-center">
+        <img id="image-intro" src="seriousCat.png" alt="" />
+        <h1 id="text-intro">. . .</h1>
+      </div>
+    </div>
+
+    <main id="mainContent">
+      <div
+        class="hero d-flex flex-column justify-content-center align-items-center h-100"
+      >
+        <img
+          id="ivee-image"
+          src="ivee.png"
+          style="width: 300px; height: 300px"
+          alt=""
+        />
+        <div id="popupText" class="text-white fs-1 fw-bold d-none text-center">
+          Tenenenennenn!!
+        </div>
+        <img
+          src="frogDance.gif"
+          style="
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+          "
+          alt=""
+        />
+        <img
+          id="bear"
+          src="bear.gif"
+          style="width: 120px; height: 120px"
+          alt=""
+        />
+        <img
+          id="bodyWave"
+          src="bodyWave.gif"
+          style="width: 120px; height: 120px"
+          alt=""
+        />
+        <img
+          id="frogFloat"
+          src="frogFloat.gif"
+          style="width: 120px; height: 120px"
+          alt=""
+        />
+        <img
+          id="bodyMusic"
+          src="bodyMusic.gif"
+          style="width: 120px; height: 120px"
+          alt=""
+        />
+        <img
+          id="twoWeirdos"
+          src="twoWeirdos.gif"
+          style="width: 120px; height: 120px"
+          alt=""
+        />
+        <div class="div d-none vh-100 bg-red">asd</div>
+      </div>
+    </main>
+
+    <script>
+      const audio1 = document.getElementById("firstAudio");
+      const audio2 = document.getElementById("secondAudio");
+      const audio3 = document.getElementById("thirdAudio");
+      const mainDiv = document.getElementById("mainContent");
+      const introImg = document.getElementById("image-intro");
+      const introText = document.getElementById("text-intro");
+      const iveeImg = document.getElementById("ivee-image");
+
+      function showPrankPhase() {
+        audio1.pause();
+        introImg.src = "memeCat.gif";
+        introText.innerText = "IT'S A PRANKKKSTERR!!";
+        audio2.play();
+        setTimeout(showSlideUp, 5000);
+      }
+
+      function showSlideUp() {
+        mainDiv.classList.add("slide-up");
+        iveeImg.classList.add("fade-out");
+        setTimeout(hideIvee, 7000);
+        audio2.pause();
+      }
+
+      function hideIvee() {
+        iveeImg.remove(); // Remove the image from DOM
+
+        setTimeout(showHero, 3000); // Call showPopup after 6 seconds
+      }
+
+      function showHero() {
+        const popup = document.getElementById("popupText");
+        popup.classList.remove("d-none"); // just in case
+        popup.classList.add("d-block");
+
+        // Force reflow to trigger transition
+        void popup.offsetWidth;
+
+        popup.classList.add("show");
+        setTimeout(realIntro, 2000);
+      }
+
+      function realIntro() {
+        const popup = document.getElementById("popupText");
+        popup.textContent = "Happy 4th Monthsary, Lolovee!";
+        
+        // Restart the animation
+        popup.classList.remove("popup-animate");
+        void popup.offsetWidth; // Force reflow
+        popup.classList.add("popup-animate");
+        const hero = document.querySelector(".hero");
+        hero.style.backgroundColor = "#e6a6c9";
+        popup.style.color = "black";
+        setTimeout(startIntro, 2000);
+      }
+      function startIntro() {
+        audio3.play();
+        const bear = document.getElementById("bear");
+        bear.style.left = "20px";
+        const bodyWave = document.getElementById("bodyWave");
+        bodyWave.style.right = "70px";
+        const frogFloat = document.getElementById("frogFloat");
+        frogFloat.style.right = "20px";
+        const twoWeirdos = document.getElementById("twoWeirdos");
+        twoWeirdos.style.right = "20px";
+        const bodyMusic = document.getElementById("bodyMusic");
+        bodyMusic.style.left = "20px";
+      }
+      document.addEventListener(
+        "click",
+        () => {
+          audio1
+            .play()
+            .then(() => {
+              setTimeout(showPrankPhase, 5000);
+            })
+            .catch((err) => {
+              console.error("Playback failed:", err);
+            });
+        },
+        { once: true }
+      );
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
